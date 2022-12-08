@@ -1,6 +1,6 @@
 <div class="container bg-custom">
     <div class="pj-block">
-        <form #pjForm="ngForm" (submit)="formData(pjForm)">
+        <form #pjForm="ngForm" (submit)="formData(pjForm);senEmail(pjForm)" ngNativeValidate>
             <div class="pj-block__left">
                 <div class="mb-2 w-100">
                     <h2 class="text-uppercase mb-0">post a job</h2>
@@ -42,43 +42,49 @@
                     </div>
                     <div class="mb-2 input-group input-group-lg">
                         <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-lg" placeholder="Category of work" pattern="[a-zA-Z]"
-                            minlength="3" name="categoryOfWork" ngModel required>
+                            aria-describedby="inputGroup-sizing-lg" placeholder="Category of work" minlength="2"
+                            maxlength="25" minlength="3" name="categoryOfWork" ngModel required>
                     </div>
                     <div class="mb-2 input-group input-group-lg">
-                        <input type="text" class="form-control" aria-label="Sizing example input" pattern="[a-zA-Z]"
-                            minlength="3" aria-describedby="inputGroup-sizing-lg" placeholder="Subcategory"
-                            name="subcategory" ngModel required>
-                    </div>
-                    <div class="mb-2 input-group input-group-lg">
-                        <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-lg" placeholder="Select emirate" name="emirate" ngModel
-                            pattern="[a-zA-Z]" minlength="3" required>
+                        <input type="text" class="form-control" aria-label="Sizing example input" minlength="2"
+                            maxlength="25" minlength="3" aria-describedby="inputGroup-sizing-lg"
+                            placeholder="Subcategory" name="subcategory" ngModel required>
                     </div>
                     <div class="mb-2 input-group input-group-lg">
                         <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-lg" placeholder="Select area" name="selectedArea"
-                            ngModel pattern="[a-zA-Z]" minlength="3" required>
+                            aria-describedby="inputGroup-sizing-lg" placeholder="Write emirate" name="emirate" ngModel
+                            minlength="2" maxlength="25" minlength="3" required>
+                    </div>
+                    <div class="mb-2 input-group input-group-lg">
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-lg" placeholder="Write area" name="selectedArea" ngModel
+                            minlength="2" maxlength="25" minlength="3" required>
                     </div>
                     <div class="mb-2 input-group input-group-lg">
                         <label for="">
-                            <input type="checkbox" class="form-check-input me-2" name="needToTruck" ngModel>Need to
+                            <input type="checkbox" class="form-check-input me-2" name="needToTruck" id="needToTruck"
+                                value="Need to
+                            truck" ngModel>Need to
                             truck</label>
                     </div>
                     <div class="mb-2 input-group input-group-lg">
                         <label for="">
-                            <input type="checkbox" class="form-check-input me-2" name="needCarPickup" ngModel>Need car
+                            <input type="checkbox" class="form-check-input me-2" name="needCarPickup" id="needCarPickup"
+                                value="Need car
+                            Pickup" ngModel>Need car
                             Pickup</label>
                     </div>
                     <div class="mb-2 input-group input-group-lg">
                         <label for="">
-                            <input type="checkbox" class="form-check-input me-2" name="customParts" ngModel>Custom
+                            <input type="checkbox" class="form-check-input me-2" name="customParts" id="customParts"
+                                value="Custom
+                            Parts" ngModel>Custom
                             Parts</label>
                     </div>
                     <div class="input-group">
                         <input class="form-control" placeholder="Desired date of repair" name="dp" [(ngModel)]="model"
                             ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker" [displayMonths]="1"
-                            [minDate]="today" name="dateOfRepair" ngModel>
+                            [minDate]="today" name="dateOfRepair" ngModel required>
                         <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
                     </div>
 
@@ -99,7 +105,7 @@
 
 
             <div class="pj-block__btns">
-                <button type="submit" class="btn btn-warning m-3" [disabled]="pjForm.valid">Send</button>
+                <button type="submit" class="btn btn-warning m-3" [disabled]="!pjForm.valid">Send</button>
                 <button type="button" class="btn btn-light m-3" (click)="pjForm.resetForm()">Clear</button>
             </div>
         </form>
