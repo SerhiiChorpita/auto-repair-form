@@ -17,8 +17,8 @@ emailRouter.route('/')
       port: 465,
       secure: true,
       auth: {
-        user: 'serhii.chorpita@zohomail.eu',//replace with your email
-        pass: '!Qwerty123,'//replace with your password
+        user: 'zohomail@zohomail.eu',//replace with your email
+        pass: 'zohomail'//replace with your password
       }
     });
 

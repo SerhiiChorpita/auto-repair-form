@@ -1,37 +1,88 @@
 <div class="container bg-custom">
     <div class="pj-block">
-        <form #pjForm="ngForm" (submit)="formData(pjForm);senEmail(pjForm)" ngNativeValidate>
+        <form #pjForm="ngForm" (submit)="senEmail(pjForm)">
             <div class="pj-block__left">
                 <div class="mb-2 w-100">
                     <h2 class="text-uppercase mb-0">post a job</h2>
                     <p class="text-capitalize">step 1</p>
                     <hr>
                 </div>
-                <div class="mb-2 input-group input-group-lg">
-                    <input type="text" class="form-control" pattern="[a-zA-Z]{3,16}" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-lg" placeholder="Mark" (input)="setStatusStepTwo(pjForm)"
-                        name="mark" ngModel required>
+                <div class="w-100 row">
+                    <div class="mb-2 input-group input-group-lg">
+                        <input type="text" class="form-control" pattern="[a-zA-Z]{3,16}"
+                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Mark"
+                            (input)="setStatusStepTwo(pjForm)" name="mark" ngModel required>
+                    </div>
+                    <div>
+                        <ng-container
+                            *ngIf="stepOneStatus && !pjForm.controls['mark'].valid && !pjForm.controls['mark'].pristine && pjForm.controls['mark'].value !== ''">
+                            <p class="red-border">use only latin characters!</p>
+                        </ng-container>
+                        <ng-container
+                            *ngIf="stepOneStatus && !pjForm.controls['mark'].valid && pjForm.controls['mark'].touched &&( pjForm.controls['mark'].pristine || pjForm.controls['mark'].value === '')">
+                            <p class="red-border">fill in this field!</p>
+                        </ng-container>
+                    </div>
                 </div>
-                <div class="mb-2 input-group input-group-lg">
-                    <input type="text" class="form-control" pattern="[a-zA-Z0-9]{2,16}"
-                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Model"
-                        (input)="setStatusStepTwo(pjForm)" name="model" ngModel required>
+                <div class="w-100 row">
+                    <div class="mb-2 input-group input-group-lg">
+                        <input type="text" class="form-control" pattern="[a-zA-Z0-9]{2,16}"
+                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+                            placeholder="Model" (input)="setStatusStepTwo(pjForm)" name="model" ngModel required>
+                    </div>
+                    <div>
+                        <ng-container
+                            *ngIf="stepOneStatus && !pjForm.controls['model'].valid && !pjForm.controls['model'].pristine && pjForm.controls['model'].value !== ''">
+                            <p class="red-border">use only latin characters!</p>
+                        </ng-container>
+                        <ng-container
+                            *ngIf="stepOneStatus && !pjForm.controls['model'].valid && pjForm.controls['model'].touched &&( pjForm.controls['model'].pristine || pjForm.controls['model'].value === '')">
+                            <p class="red-border">fill in this field!</p>
+                        </ng-container>
+                    </div>
                 </div>
-                <div class="mb-2 input-group input-group-lg">
-                    <input type="number" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-lg" min="1990" max="2022" placeholder="Year"
-                        (input)="setStatusStepTwo(pjForm)" name="year" ngModel required>
+                <div class="w-100 row">
+                    <div class="mb-2 input-group input-group-lg">
+                        <input type="number" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-lg" min="1990" max="2022" placeholder="Year"
+                            (input)="setStatusStepTwo(pjForm)" name="year" ngModel required>
+                    </div>
+                    <div>
+                        <ng-container
+                            *ngIf="stepOneStatus && !pjForm.controls['year'].valid && !pjForm.controls['year'].pristine && pjForm.controls['year'].value !== ''">
+                            <p class="red-border">use only numbers between 1990 & 2022!</p>
+                        </ng-container>
+                        <ng-container
+                            *ngIf="stepOneStatus && !pjForm.controls['year'].valid && pjForm.controls['year'].touched &&( pjForm.controls['year'].pristine || pjForm.controls['year'].value === '')">
+                            <p class="red-border">fill in this field!</p>
+                        </ng-container>
+                    </div>
                 </div>
-                <div class="mb-2 input-group input-group-lg">
-                    <textarea class="form-control" placeholder="What exactly need to be repaired?"
-                        (input)="setStatusStepTwo(pjForm)" id="floatingTextarea" minlength="10" maxlength="255"
-                        name="toBeRepaired" ngModel required></textarea>
+                <div class="w-100 row">
+                    <div class="mb-2 input-group input-group-lg">
+                        <textarea class="form-control" placeholder="What exactly need to be repaired?"
+                            (input)="setStatusStepTwo(pjForm)" id="floatingTextarea" minlength="10" maxlength="255"
+                            name="toBeRepaired" ngModel required></textarea>
+                    </div>
+                    <div>
+                        <ng-container
+                            *ngIf="stepOneStatus && !pjForm.controls['toBeRepaired'].valid && !pjForm.controls['toBeRepaired'].pristine && pjForm.controls['toBeRepaired'].value !== '' && pjForm.controls['toBeRepaired'].value.length < 10">
+                            <p class="red-border">min 10 characters!</p>
+                        </ng-container>
+                        <ng-container
+                            *ngIf="stepOneStatus && !pjForm.controls['toBeRepaired'].valid && pjForm.controls['toBeRepaired'].touched &&( pjForm.controls['toBeRepaired'].pristine || pjForm.controls['toBeRepaired'].value === '')">
+                            <p class="red-border">fill in this field!</p>
+                        </ng-container>
+                    </div>
                 </div>
+
                 <div class="description">
                     <p><sub>Description</sub></p>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus quisquam magnam et dolore,
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus quisquam magnam et
+                        dolore,
                         doloremque perspiciatis!</p>
                 </div>
+
             </div>
             <ng-container *ngIf="stepTwoStatus">
                 <div class="pj-block__right">
@@ -40,26 +91,76 @@
                         <p class="text-capitalize">step 2</p>
                         <hr>
                     </div>
-                    <div class="mb-2 input-group input-group-lg">
-                        <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-lg" placeholder="Category of work" minlength="2"
-                            maxlength="25" minlength="3" name="categoryOfWork" ngModel required>
+                    <div class="w-100 row">
+                        <div class="mb-2 input-group input-group-lg">
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-lg" placeholder="Category of work" minlength="2"
+                                maxlength="25" minlength="3" name="categoryOfWork" ngModel required>
+                        </div>
+                        <div>
+                            <ng-container
+                                *ngIf="stepTwoStatusLoad && !pjForm.controls['categoryOfWork'].valid && !pjForm.controls['categoryOfWork'].pristine && pjForm.controls['categoryOfWork'].value !== ''">
+                                <p class="red-border">use only latin characters!</p>
+                            </ng-container>
+                            <ng-container
+                                *ngIf="stepTwoStatusLoad && !pjForm.controls['categoryOfWork'].valid && pjForm.controls['categoryOfWork'].touched &&( pjForm.controls['categoryOfWork'].pristine || pjForm.controls['categoryOfWork'].value === '')">
+                                <p class="red-border">fill in this field!</p>
+                            </ng-container>
+                        </div>
                     </div>
-                    <div class="mb-2 input-group input-group-lg">
-                        <input type="text" class="form-control" aria-label="Sizing example input" minlength="2"
-                            maxlength="25" minlength="3" aria-describedby="inputGroup-sizing-lg"
-                            placeholder="Subcategory" name="subcategory" ngModel required>
+                    <div class="w-100 row">
+                        <div class="mb-2 input-group input-group-lg">
+                            <input type="text" class="form-control" aria-label="Sizing example input" minlength="2"
+                                maxlength="25" aria-describedby="inputGroup-sizing-lg" placeholder="Subcategory"
+                                name="subcategory" ngModel required>
+                        </div>
+                        <div>
+                            <ng-container
+                                *ngIf="stepTwoStatusLoad && !pjForm.controls['subcategory'].valid && !pjForm.controls['subcategory'].pristine && pjForm.controls['subcategory'].value !== ''">
+                                <p class="red-border">use only latin characters!</p>
+                            </ng-container>
+                            <ng-container
+                                *ngIf="stepTwoStatusLoad && !pjForm.controls['subcategory'].valid && pjForm.controls['subcategory'].touched &&( pjForm.controls['subcategory'].pristine || pjForm.controls['subcategory'].value === '')">
+                                <p class="red-border">fill in this field!</p>
+                            </ng-container>
+                        </div>
                     </div>
-                    <div class="mb-2 input-group input-group-lg">
-                        <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-lg" placeholder="Write emirate" name="emirate" ngModel
-                            minlength="2" maxlength="25" minlength="3" required>
+                    <div class="w-100 row">
+                        <div class="mb-2 input-group input-group-lg">
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-lg" placeholder="Write emirate" name="emirate"
+                                ngModel minlength="2" maxlength="25" required>
+                        </div>
+                        <div>
+                            <ng-container
+                                *ngIf="stepTwoStatusLoad && !pjForm.controls['emirate'].valid && !pjForm.controls['emirate'].pristine && pjForm.controls['emirate'].value !== ''">
+                                <p class="red-border">use only latin characters!</p>
+                            </ng-container>
+                            <ng-container
+                                *ngIf="stepTwoStatusLoad && !pjForm.controls['emirate'].valid && pjForm.controls['emirate'].touched &&( pjForm.controls['emirate'].pristine || pjForm.controls['emirate'].value === '')">
+                                <p class="red-border">fill in this field!</p>
+                            </ng-container>
+                        </div>
                     </div>
-                    <div class="mb-2 input-group input-group-lg">
-                        <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-lg" placeholder="Write area" name="selectedArea" ngModel
-                            minlength="2" maxlength="25" minlength="3" required>
+                    <div class="w-100 row">
+                        <div class="mb-2 input-group input-group-lg">
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-lg" placeholder="Write area" name="selectedArea"
+                                ngModel minlength="2" maxlength="25" required>
+                        </div>
+                        <div>
+                            <ng-container
+                                *ngIf="stepTwoStatusLoad && !pjForm.controls['selectedArea'].valid && !pjForm.controls['selectedArea'].pristine && pjForm.controls['selectedArea'].value !== ''">
+                                <p class="red-border">use only latin characters!</p>
+                            </ng-container>
+                            <ng-container
+                                *ngIf="stepTwoStatusLoad && !pjForm.controls['selectedArea'].valid && pjForm.controls['selectedArea'].touched &&( pjForm.controls['selectedArea'].pristine || pjForm.controls['selectedArea'].value === '')">
+                                <p class="red-border">fill in this field!</p>
+                            </ng-container>
+                        </div>
                     </div>
+
+
                     <div class="mb-2 input-group input-group-lg">
                         <label for="">
                             <input type="checkbox" class="form-check-input me-2" name="needToTruck" id="needToTruck"
@@ -81,11 +182,34 @@
                             Parts" ngModel>Custom
                             Parts</label>
                     </div>
-                    <div class="input-group">
-                        <input class="form-control" placeholder="Desired date of repair" name="dp" [(ngModel)]="model"
-                            ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker" [displayMonths]="1"
-                            [minDate]="today" name="dateOfRepair" ngModel required>
-                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+
+                    <div class="w-100 row">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="Desired date of repair" [(ngModel)]="model"
+                                ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker" name="db"
+                                [displayMonths]="1" [minDate]="today" name="dateOfRepair" ngModel required>
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                type="button"></button>
+                        </div>
+                        <div>
+                            <ng-container *ngIf="
+                                stepTwoStatusLoad && 
+                                !pjForm.controls['dateOfRepair'].valid && 
+                                !pjForm.controls['dateOfRepair'].pristine && 
+                                pjForm.controls['dateOfRepair'].value !== ''
+                            ">
+                                <p class="red-border">Select a date from the calendar!</p>
+                            </ng-container>
+                            <ng-container *ngIf="
+                            stepTwoStatusLoad && 
+                            !pjForm.controls['dateOfRepair'].valid && 
+                            pjForm.controls['dateOfRepair'].touched &&
+                            (pjForm.controls['dateOfRepair'].pristine || 
+                            pjForm.controls['dateOfRepair'].value === '')
+                            ">
+                                <p class="red-border">select a date!</p>
+                            </ng-container>
+                        </div>
                     </div>
 
                     <div class="mb-2">
@@ -102,7 +226,6 @@
                     <button class="btn btn-secondary btn-sm m-2 float-end" (click)="d.close()">Close</button>
                 </ng-template>
             </ng-container>
-
 
             <div class="pj-block__btns">
                 <button type="submit" class="btn btn-warning m-3" [disabled]="!pjForm.valid">Send</button>

@@ -71,15 +71,12 @@
   }
 }
 
-// .ng-valid {
-//   outline: 2px solid lightgreen;
-// }
-// .ng-dirty .ng-touched .ng-invalid:not(form) {
-//   outline: 2px solid rgba(255, 0, 0, 0.5);
-// }
-
 .red-border {
-  outline: 2px solid red;
+  border-bottom: 1px solid red;
+  color: red;
+  border-radius: 5px;
+  text-align: center;
+  background: linear-gradient(0deg, white, transparent);
 }
 
 .ng-invalid .ng-touched:not(#needToTruck, #needCarPickup, #customParts) {
@@ -90,4 +87,16 @@
 }
 .green-border {
   outline: 2px solid greenyellow;
+}
+
+@media only screen and (max-width: 768px) {
+  .pj-block {
+    form {
+      flex-flow: column nowrap;
+    }
+    &__left,
+    &__right {
+      width: 100%;
+    }
+  }
 }
