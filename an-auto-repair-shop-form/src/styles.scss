@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(211, 211, 211, 0.1);
+}
+app-root {
+  top: 10px;
+  /* left: 0; */
+  position: absolute;
+}
